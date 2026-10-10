@@ -11,3 +11,5 @@ Task-start prompt: Read project-contract.md and this brief/task. Use e-media-bac
 
 ## Repository/toolchain setup — 2026-10-10
 Plan: establish local main/development/feature branches, project folders, instructions, feature map and compiler-base recipe. Rollback: retain scaffold backup before removing repositories. Acceptance: tracked bootstrap, clean feature branches, independent skills and shared-theme ownership documented. Result: repository scaffolds prepared; compiler image and cluster deployment remain unvalidated/unexecuted.
+
+Validation: project skill frontmatter passed quick_validate.py; Markdown links and skill contract references resolve. Compiler image has not been built; cluster target/storage and EFL package provenance remain pending. Local bootstrap committed; main/development/feature branches established.
