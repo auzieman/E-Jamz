@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "base_image": "alpine:3.24.2@sha256:d56c381f961d307a21b3ca004cf1e3910f106644aefb1f43e654c8a56c4fd395",
+  "architecture": "amd64",
+  "required_pkg_config": [
+    "elementary",
+    "gstreamer-1.0",
+    "libopenmpt"
+  ],
+  "candidate_packages": [
+    "efl-dev",
+    "gstreamer-dev",
+    "gst-plugins-base-dev",
+    "libopenmpt-dev"
+  ],
+  "package_status": "matching-release availability, versions and signed EFL feed still require remote verification",
+  "deployment_status": "not deployed"
+}

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "kind",
+    "capabilities",
+    "requires"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*$"
+    },
+    "kind": {
+      "enum": [
+        "decoder",
+        "provider"
+      ]
+    },
+    "capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "local_audio",
+          "tracker_audio",
+          "seek",
+          "browse",
+          "stream"
+        ]
+      }
+    },
+    "requires": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "pkg_config"
+        ],
+        "properties": {
+          "pkg_config": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.+-]+$"
+          },
+          "minimum_version": {
+            "type": "string",
+            "pattern": "^[0-9]+(\\.[0-9]+)*$"
+          }
+        }
+      }
+    }
+  }
+}

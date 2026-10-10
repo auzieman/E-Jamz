@@ -1,12 +1,11 @@
-# Feature map
-All features are planning candidates; folder presence is not implementation.
+# E-Jamz feature map
 
-| Feature | State | Acceptance |
+| Slice | State | Acceptance |
 |---|---|---|
-| Backend study | Planned | Map Clementine components, Qt coupling, licensing and reuse costs |
-| Local MP3/MP4/direct streams | Planned | Actual output and play/pause/seek/error handling |
-| Library and queue | Planned | Verify ordering, metadata and persistence for selected slice |
-| Native blue-metal UI | Planned | Preview focus/inactive/constrained layouts; keep provider logic separate |
-| Spotify feasibility | Investigation required | Establish compliant auth and native playback/distribution route |
-| Password/QR modes | Conditional | Provider-supported flow; no unsupported credential collection |
-| Other providers | Deferred | Assess each provider independently |
+| Local ordinary/tracker audio | Planned | Mixed licensed fixtures audibly play; MOD/S3M/XM covered |
+| Playlist/queue | Planned | Save/reopen, advance, missing/corrupt-item recovery |
+| Glossy blue-metal compact UI | Planned | Transport, seek/volume and optional playlist pane readable |
+| JSON dialogs/plugin metadata | Schemas prepared | Valid examples and negative cases; runtime renderer pending |
+| Remote toolchain proof | Draft | Signed dependencies and retained compile/link evidence |
+| Stream/provider plumbing | Interfaces documented | Disabled adapters; no provider contacts |
+| Eplet, visualization, host dependency install | Deferred | Separate later tasks |

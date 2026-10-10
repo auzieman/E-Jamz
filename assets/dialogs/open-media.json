@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "open_media",
+  "title": "Open local audio",
+  "fields": [
+    {
+      "id": "files",
+      "type": "file",
+      "label": "Audio files",
+      "required": true
+    }
+  ],
+  "actions": [
+    {
+      "id": "open",
+      "label": "Open",
+      "action": "open_files"
+    },
+    {
+      "id": "cancel",
+      "label": "Cancel",
+      "action": "cancel"
+    }
+  ]
+}

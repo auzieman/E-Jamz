@@ -1,6 +1,8 @@
-# E media player
+# E-Jamz
 
-Independent local project scaffold; no product implementation or release yet.
+Local-first EFL audio player preparation; no playback implementation or release yet.
+
+See [v0 contract](docs/v0-contract.md), [interfaces](docs/interfaces.md) and [pipeline preparation](docs/pipeline.md).
 
 Read [brief](docs/brief.md), [feature map](docs/feature-map.md), [active task](docs/task.md), [shared design/ownership contract](docs/project-contract.md), [branching](docs/branching.md) and [remote toolchain](docs/toolchain.md).
 

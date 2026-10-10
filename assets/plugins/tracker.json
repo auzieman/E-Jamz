@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "openmpt_tracker",
+  "kind": "decoder",
+  "capabilities": [
+    "local_audio",
+    "tracker_audio"
+  ],
+  "requires": [
+    {
+      "pkg_config": "libopenmpt"
+    }
+  ]
+}

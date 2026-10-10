@@ -13,3 +13,11 @@ Task-start prompt: Read project-contract.md and this brief/task. Use e-media-bac
 Plan: establish local main/development/feature branches, project folders, instructions, feature map and compiler-base recipe. Rollback: retain scaffold backup before removing repositories. Acceptance: tracked bootstrap, clean feature branches, independent skills and shared-theme ownership documented. Result: repository scaffolds prepared; compiler image and cluster deployment remain unvalidated/unexecuted.
 
 Validation: project skill frontmatter passed quick_validate.py; Markdown links and skill contract references resolve. Compiler image has not been built; cluster target/storage and EFL package provenance remain pending. Local bootstrap committed; main/development/feature branches established.
+
+## EJ-001 — E-Jamz preparation, 2026-10-10
+Objective: define local-first playback, declarative dialogs/plugin metadata and a remote dependency-proof pipeline before implementation.
+Plan: update feature contract; add schemas/examples and toolchain proof script; stage a draft BKC recipe using existing core ownership. No new executor dispatch, provider integration or cluster deployment.
+Rollback: revert this task's local commits; original BKC checkout and theme repository are untouched.
+Acceptance: schemas reject malformed metadata; shell proof syntax passes; dependency targets and artifact evidence are explicit; draft pipeline states unsupported wiring and required runtime inputs honestly.
+
+EJ-001 result: local-first/UI/interface contract, versioned dialog/plugin schemas and examples, dependency manifest, remote compile/link probe and draft BKC recipe prepared. Schema validation and malformed/version/action negative cases passed; shell syntax and diff whitespace checks passed. No remote compilation, audio runtime or provider wiring. Matching-release dependencies and generic BKC core wiring remain pending. Next action: resolve remote target and signed EFL/dependency provenance, then implement the smallest missing CLI/core operation if necessary. Theme work remains parked.
