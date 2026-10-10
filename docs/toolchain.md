@@ -1,0 +1,9 @@
+# Remote E toolchain plan
+Status: preparation only; no swarm service, Kubernetes Job or compiler image has been deployed or built.
+Use BKC CLI/core-backed pipelines to stage sources, invoke builds in swarm or Kubernetes, monitor and retain logs. Scheduler manifests wrap the job and do not introduce another execution engine.
+Baseline: Alpine 3.24.2 amd64 with the digest retained from AlpinE/build/Dockerfile. EFL development packages and edje_cc must come from the signed matching AlpinE feed or verified native builds. Record repository key, package versions/checksums and image digest; do not mix edge binaries.
+build/Dockerfile prepares the common compiler base. Install the verified EFL development/tool packages in a subsequent derived image once their package provenance is selected; this base alone is not an EFL-ready image.
+Theme tools: edje_cc, edje_decc where available, Eet tooling and image/font assets. Media tools: EFL development headers, pkg-config, Meson/Ninja or selected upstream build system; add GStreamer/other engine development dependencies only after backend selection.
+Remote job inputs: immutable source revision, selected theme or player target, toolchain digest and signed package provenance. Mount source read-only where possible; use separate writable build/output and reusable dependency-cache storage. Store APKs/EDJs, source hashes, package inventory and logs as BKC run artifacts.
+First deployment decision: select existing swarm worker or Kubernetes namespace/storage and record resources. Then validate compiler/EFL tools, compile one minimal target, and validate output in a separate graphical runtime session on laptop/VM. Container success does not prove rendering or playback.
+No privileged desktop container or new cluster is required by this plan. GPU/display access is evaluated for the selected runtime test.

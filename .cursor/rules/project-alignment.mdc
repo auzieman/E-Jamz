@@ -1,0 +1,5 @@
+---
+description: Project scope and architecture
+alwaysApply: true
+---
+Read AGENTS.md and docs/project-contract.md; resume docs/task.md. Keep this adapter thin. User instructions take precedence.
