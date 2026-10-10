@@ -18,3 +18,10 @@ Measure on the actual target laptop after the first working slice, using the sam
 For each state retain process CPU, resident memory, observation duration, display/render backend and audio settings. Include process children and the relevant service contribution if playback is out of process. Separate startup peaks from steady state.
 Acceptance: minimized UI stops optional visual updates while audio continues; static controls do not trigger continuous redraw work; sustained playback has no observed underruns; repeated operations show no unexplained progressive memory growth. Record measurements before assigning numerical budgets; no guessed universal CPU/RAM limit.
 Visual acceptance and playback acceptance remain independent from the container compile/link probe. A release records both and explains unmeasured states.
+
+## EJ-003 — actual native control resource
+The first original raster/Edje resource snapshot is in assets/skins/blue-steel. It exports `bk/material/control`: textured PNG backing, live `label.activate` text, independent event area, hover/pressed/disabled descriptions and `bk,action,activate` output (source `activate`). Host sends `bk,control,disabled` or `bk,control,enabled`, source `activate`; the disabled state hides the pointer event part. Keyboard invocation must also respect disabled state in the host.
+
+An E-Jamz UI adapter sets the label and maps activation to a transport request; the media core determines playback and reports current state back. An icon does not claim playback is working. No timers or periodic animation are used in this control. The EDC entrypoint is control.edc; compile with `edje_cc -id assets control.edc -o blue-steel.edj` through the approved remote toolchain.
+
+This is a self-contained versioned resource export with origin revision and file hashes, not a runtime dependency on the desktop theme or theme-kit checkout. It is not yet compiled, rendered or wired into a player host. The high-resolution button texture must be checked for small-control readability and decoded-memory cost on target before it becomes a default.

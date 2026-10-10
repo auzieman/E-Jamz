@@ -1,0 +1,4 @@
+images { image: "button.png" COMP; }
+collections {
+#include "control-group.edc"
+}

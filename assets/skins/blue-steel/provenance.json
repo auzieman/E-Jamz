@@ -1,0 +1,12 @@
+{
+  "origin": "theme-kit master/blue-steel",
+  "revision": "1d2ab61b404ca0202d2c7ea03713df81a3125fa2",
+  "method": "original built-in image_gen raster + original Edje control source",
+  "group": "bk/material/control",
+  "status": "resource candidate; compilation/render/playback pending",
+  "files": {
+    "assets/button.png": "911eb8b338d59ab87e40afebebe0b37a37ab0e0e7bc7b2340bf87bf4af490a21",
+    "control-group.edc": "85b436be5101b293e70f0b135504d11f87765094db696c9b9e60a562cdba01ab",
+    "control.edc": "2ff35f78d1290e43156f9c3d1ee2a0e5077a3622042d9afd138791d7fe7c2167"
+  }
+}

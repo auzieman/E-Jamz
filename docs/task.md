@@ -28,3 +28,8 @@ Plan: add visual/runtime acceptance reference, tighten the visual skill and proj
 Rollback: revert EJ-002 documentation commit. Acceptance: next slice starts with a visual preview; performance evidence distinguishes static, playing and minimized states; remote readiness does not claim unsupported pipeline execution.
 
 EJ-002 result: visual-led skill/guidance, state-based performance acceptance and remote readiness map prepared. Skill validation, contract positive/negative cases, reference checks and whitespace checks passed. No artwork, runtime implementation, remote run or theme changes. Next bounded preparation task: trace the CLI-owned staging/remote-execute/artifact path and inspect existing build capacity before enabling the draft proof.
+
+## EJ-003 — raster Edje control resource
+Plan: import a versioned original button/control resource from theme-kit BK-010 for native E-Jamz presentation, and document host-owned labels, action requests and disabled state. No engine/provider implementation or desktop chrome dependency. Rollback: revert EJ-003 export/docs. Acceptance: self-contained EDC/raster snapshot with exact origin revision and hashes, signal contract and honest compiler/runtime limits.
+
+EJ-003 result: imported independent raster button/control EDC snapshot from theme-kit 1d2ab61, with per-file hashes and host signal contract. Resource provenance and include/image references checked; no player host, audio backend, provider, compile or rendering PASS claimed.

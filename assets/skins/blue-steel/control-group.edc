@@ -1,0 +1,46 @@
+group { name: "bk/material/control"; min: 32 32;
+ parts { part { name: "button.activate"; type: IMAGE; mouse_events: 0;
+ description { state: "default" 0.0; 
+ image { normal: "button.png"; border: 160 160 160 160; border_scale: 1; border_scale_by: 0.035; }
+ color: 180 200 220 255;
+ }
+ description { state: "hover" 0.0; inherit: "default" 0.0; color: 255 255 255 255; }
+ description { state: "pressed" 0.0; inherit: "default" 0.0; color: 100 150 195 255; }
+ description { state: "disabled" 0.0; inherit: "default" 0.0; color: 110 120 130 170; }
+}
+part { name: "label.activate"; type: TEXT; mouse_events: 0;
+ description { state: "default" 0.0;
+ rel1.to: "button.activate"; rel2.to: "button.activate";
+ color: 225 240 255 255; text { text: "▶"; font: "Sans"; size: 18; }
+ }
+}
+part { name: "event.activate"; type: RECT;
+ description { state: "default" 0.0;
+ rel1.to: "button.activate"; rel2.to: "button.activate"; color: 0 0 0 0;
+ }
+ description { state: "disabled" 0.0; inherit: "default" 0.0; visible: 0; }
+}
+ }
+ programs { program { name: "activate-mouse-in"; signal: "mouse,in"; source: "event.activate";
+ action: STATE_SET "hover" 0.0; target: "button.activate";
+}
+program { name: "activate-mouse-out"; signal: "mouse,out"; source: "event.activate";
+ action: STATE_SET "default" 0.0; target: "button.activate";
+}
+program { name: "activate-mouse-down-1"; signal: "mouse,down,1"; source: "event.activate";
+ action: STATE_SET "pressed" 0.0; target: "button.activate";
+}
+program { name: "activate-mouse-up-1"; signal: "mouse,up,1"; source: "event.activate";
+ action: STATE_SET "hover" 0.0; target: "button.activate";
+}
+program { signal: "mouse,clicked,1"; source: "event.activate";
+ action: SIGNAL_EMIT "bk,action,activate" "activate";
+}
+program { signal: "bk,control,disabled"; source: "activate";
+ action: STATE_SET "disabled" 0.0; target: "button.activate"; target: "event.activate";
+}
+program { signal: "bk,control,enabled"; source: "activate";
+ action: STATE_SET "default" 0.0; target: "button.activate"; target: "event.activate";
+}
+ }
+}
