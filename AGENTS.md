@@ -4,3 +4,5 @@ Keep one active objective; record plan, rollback and actual evidence in docs/tas
 Keep shared instructions canonical here; Cursor/Codex adapters must not evolve conflicting architecture. User instructions take precedence.
 Use BKC CLI/core-backed remote jobs for lab builds. Read docs/toolchain.md and the sibling AlpinE guidance before APK/build integration; this scaffold does not authorize deployment.
 Keep sources, build inputs and screenshots traceable. Screenshots belong in docs/images. Compilation is not visual/playback acceptance. Tags require validated main releases, not planning completion.
+
+Artwork/layout lead the next player slice: read docs/visual-performance.md and use e-visual-layout for previews before full widget implementation. Read/apply imagegen only for selected raster-artwork tasks. Keep runtime impact measurable and theme-kit work parked unless selected.

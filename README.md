@@ -18,3 +18,5 @@ docs/images/ — screenshots and visual evidence
 ```
 
 Work from development into feature/<topic>; merge accepted features back to development. Validated releases merge to main and receive annotated version tags. Source licensing and reused-asset notices must be established before distribution.
+
+Preparation references: [visual/performance acceptance](docs/visual-performance.md) and [remote readiness](docs/preflight.md).

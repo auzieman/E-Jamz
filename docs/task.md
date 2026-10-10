@@ -21,3 +21,10 @@ Rollback: revert this task's local commits; original BKC checkout and theme repo
 Acceptance: schemas reject malformed metadata; shell proof syntax passes; dependency targets and artifact evidence are explicit; draft pipeline states unsupported wiring and required runtime inputs honestly.
 
 EJ-001 result: local-first/UI/interface contract, versioned dialog/plugin schemas and examples, dependency manifest, remote compile/link probe and draft BKC recipe prepared. Schema validation and malformed/version/action negative cases passed; shell syntax and diff whitespace checks passed. No remote compilation, audio runtime or provider wiring. Matching-release dependencies and generic BKC core wiring remain pending. Next action: resolve remote target and signed EFL/dependency provenance, then implement the smallest missing CLI/core operation if necessary. Theme work remains parked.
+
+## EJ-002 — visual-led preparation, 2026-10-10
+Objective: make artwork/layout and low host impact first-class acceptance requirements while completing the remote-run handoff.
+Plan: add visual/runtime acceptance reference, tighten the visual skill and project guidance, and document exact readiness gaps. No product/theme implementation or cluster deployment.
+Rollback: revert EJ-002 documentation commit. Acceptance: next slice starts with a visual preview; performance evidence distinguishes static, playing and minimized states; remote readiness does not claim unsupported pipeline execution.
+
+EJ-002 result: visual-led skill/guidance, state-based performance acceptance and remote readiness map prepared. Skill validation, contract positive/negative cases, reference checks and whitespace checks passed. No artwork, runtime implementation, remote run or theme changes. Next bounded preparation task: trace the CLI-owned staging/remote-execute/artifact path and inspect existing build capacity before enabling the draft proof.

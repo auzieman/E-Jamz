@@ -8,3 +8,5 @@ Preserve blue-metal controls, ice-blue accents, readable text and the explorator
 Prepare a representative preview at relevant laptop/external-display sizes and include focus, inactive and constrained-layout states where applicable. For animated scenes include a still/low-motion view and evaluate flashing, readability and idle cost.
 Record source revisions/provenance, how the preview was produced and remaining uncertainty. Compilation is not visual acceptance; request user preference only for material unresolved choices while continuing independent work.
 Build tutorial steps from verified editable examples. Keep unrelated redesigns and new features in follow-ups.
+
+For E-Jamz read ../../../docs/visual-performance.md. Start with compact player/playlist previews and report visual choices before full widget implementation. Use imagegen skill for selected raster creation when available; use native EDC/vector assets for theme mechanics. Keep static-resource caching and visibility-driven updates in the design, and require target runtime measurements rather than assuming lightweight rendering. Eplet/visualizers remain deferred unless explicitly selected.

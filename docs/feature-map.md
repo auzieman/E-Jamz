@@ -9,3 +9,5 @@
 | Remote toolchain proof | Draft | Signed dependencies and retained compile/link evidence |
 | Stream/provider plumbing | Interfaces documented | Disabled adapters; no provider contacts |
 | Eplet, visualization, host dependency install | Deferred | Separate later tasks |
+
+Artwork/layout lead the next UI slice; consult visual-performance.md. Low-impact runtime measurements are required before release acceptance.
