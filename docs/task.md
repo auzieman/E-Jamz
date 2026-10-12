@@ -319,3 +319,11 @@ authenticated as auzieman provides the new-repository creation route; GitHub
 connector metadata and Git SSH refs verify the result. Publish accepted main
 and development, with annotated v0.1.0 tags identifying retained native proof.
 Runtime archives include licenses/notices and the corresponding source URL.
+
+GitHub publication: public E-Jamz repository created through the signed-in
+browser and verified by connected GitHub metadata. Main/development/feature
+branches and annotated v0.1.0 tag pushed through authenticated SSH; remote
+main and peeled tag exactly match accepted local refs. User-supplied desktop
+shot added to README without edits; original file/hash retained in provenance.
+Release download archives contain selected licenses/notices and tagged source
+URL. Full Sci-Fi donor EDJ remains outside public binary assets.

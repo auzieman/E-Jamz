@@ -1,6 +1,10 @@
 # E-Jamz
 
-Local-first EFL audio player and companion sound rack. The current native application is accepted for its first release; publication preparation is recorded in [v0.1.0 notes](docs/release-v0.1.0.md).
+Native EFL audio player and companion EQ rack. [v0.1.0 Working beta](https://github.com/auzieman/E-Jamz/releases/tag/v0.1.0) is available; see [release scope and checks](docs/release-v0.1.0.md).
+
+![Desktop screenshot](docs/images/ejamz-user-desktop-20261012.jpg)
+
+E-Jamz in Amber Steel with ten-band EQ, filtered playlist and settings drawer on the BlackKnight desktop.
 
 See the [prototype and current limits](docs/prototype.md), including native folder/drops, wheel paging, filename/folder filtering, M3U8 save/load, EQ presets, the embedded dot-LCD display, an attached settings drawer and three live skins.
 
