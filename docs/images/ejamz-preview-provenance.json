@@ -1,0 +1,16 @@
+{
+  "source_baseline": "63c043a",
+  "texture_origin": "theme-kit 1d2ab61; independent EJ-003 snapshot",
+  "texture_sha256": "911eb8b338d59ab87e40afebebe0b37a37ab0e0e7bc7b2340bf87bf4af490a21",
+  "method": "Editable SVG layout with unchanged embedded texture and nine-slice references; rsvg-convert PNG export",
+  "compact_dimensions": [
+    520,
+    264
+  ],
+  "stack_dimensions": [
+    800,
+    810
+  ],
+  "metadata": "Illustrative; no external artwork or lyrics fetched",
+  "native_skin": "src/ui/player.edc; tools/generate-player-edc.py"
+}

@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-11",
+  "baseline": "63c043a",
+  "build_runs": [
+    "5934803a-f598-4694-a61c-d50619caeaef",
+    "c8e4fc1b-e149-4529-8544-ae57be009e44"
+  ],
+  "native_render": "software_x11, 480x258",
+  "verified": [
+    "native window renders",
+    "Play reaches Playing with advancing position",
+    "PipeWire stream negotiated on default sink",
+    "Pause reaches Paused",
+    "Up next and Sound rack open via skinned controls"
+  ],
+  "unverified": [
+    "audible listening quality",
+    "EQ listening/bypass behavior",
+    "seek/volume interaction acceptance",
+    "queue persistence",
+    "tracker playback",
+    "sustained CPU/RSS and underruns"
+  ],
+  "first_run_diagnostics": "Corrupt generated fixture reported type error; earlier window disappeared before recovery checks, with EFL diagnostics in runtime.log. No recovery PASS claimed.",
+  "artifacts": {
+    "ejamz": "9ab6cf02a98381c5d0f9a91919a084277b96030140b2003b5cd99319ea0eb975",
+    "player.edj": "f0e56250ee76afe420b6319fae7b918d7c0d288e65afb25073290b52cf5290c6",
+    "dependencies.txt": "6e7583317dcde121f536710043fd4b1bc343aab7e876a21275319291afcd9a22"
+  },
+  "fixture_provenance": "Locally generated 220/330Hz 12-second PCM WAV tones, mono 48kHz, peak 1000/32768; no external media",
+  "runtime_left": "v2 open and paused; companion panels shown",
+  "current_runtime_diagnostics": "v2 remains running, but Ecore event-handler safety diagnostics appear in runtime-v2.log; investigate before release acceptance."
+}

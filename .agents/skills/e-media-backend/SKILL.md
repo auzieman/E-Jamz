@@ -8,3 +8,5 @@ Keep presentation, application state, engine and provider adapters separate. Val
 Spotify compliance is required: unofficial playback and successful OAuth are not evidence of provider approval. Establish supported Linux playback and distribution conditions; username/password belongs in supported provider-owned login, and QR mode requires supported pairing/authentication.
 For investigation, produce a source-backed component/feasibility map and bounded next action. For implementation, verify actual output, state/error propagation and the selected slice's acceptance criteria. Do not register provider apps, alter accounts or launch external work without task authorization.
 Record outcomes and remaining uncertainty in the active task; keep additional providers and UI redesigns as follow-ups.
+
+Local playback preparation uses ../../../docs/product-design.md and ../../../docs/audio-and-fixtures.md. GStreamer is the primary direction; Clementine and Rage are source-study references, not selected application dependencies. Use e-audio-integration for host/sink/DSP proof and e-library-organize for discovery/relink/relocation work.

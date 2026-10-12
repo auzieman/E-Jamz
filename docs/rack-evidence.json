@@ -1,0 +1,143 @@
+{
+  "date": "2026-10-11",
+  "runs": {
+    "edeecf79-a30a-42d9-8ef9-3ea8ab26525c": "complete",
+    "bdb0e24a-519a-426d-8149-e4b1b3e393f9": "failed",
+    "087c62bd-115e-416a-9550-71314665aedd": "complete",
+    "f55b3d3a-4db8-4e44-ba43-81770f25b31a": "complete"
+  },
+  "artifacts": {
+    "ejamz": "d3d87a414040552fbfe917f48e0ae23ae2df49f44744d98c8739e958af40196c",
+    "player.edj": "7225e50d5c1b4db6105d7a42fc9dbaaf0e343fa89571e5b56b41f952385ffde9"
+  },
+  "verified": [
+    "matching native Edje frames and chrome for three windows",
+    "EQ thumb rendering, drag reports -5.2 dB, bypass toggle",
+    "companion close and main visibility toggles",
+    "native titlebar drag moves all visible panels together"
+  ],
+  "final_positions": {
+    "player": [
+      1660,
+      20,
+      480,
+      258
+    ],
+    "rack": [
+      1660,
+      278,
+      480,
+      220
+    ],
+    "queue": [
+      1660,
+      498,
+      480,
+      344
+    ]
+  },
+  "resource_samples": {
+    "playing-visible.json": {
+      "state": "playing, three skinned panels visible",
+      "seconds": 3.0,
+      "processes": [
+        {
+          "pid": 22850,
+          "name": "player",
+          "cpu_percent_one_core": 3.67,
+          "rss_kib": 45980
+        },
+        {
+          "pid": 5425,
+          "name": "pipewire",
+          "cpu_percent_one_core": 8.33,
+          "rss_kib": 25104
+        },
+        {
+          "pid": 5427,
+          "name": "wireplumber",
+          "cpu_percent_one_core": 49.33,
+          "rss_kib": 31920
+        },
+        {
+          "pid": 5428,
+          "name": "pipewire-pulse",
+          "cpu_percent_one_core": 31.67,
+          "rss_kib": 320976
+        }
+      ],
+      "limits": "short snapshot; player ticks include threads; shared audio services may include other clients; no underrun or sustained-growth acceptance"
+    },
+    "playing-minimized.json": {
+      "state": "playing, main minimized; rack/queue static",
+      "seconds": 3.0,
+      "processes": [
+        {
+          "pid": 22850,
+          "name": "player",
+          "cpu_percent_one_core": 4.33,
+          "rss_kib": 45992
+        },
+        {
+          "pid": 5425,
+          "name": "pipewire",
+          "cpu_percent_one_core": 7.33,
+          "rss_kib": 25104
+        },
+        {
+          "pid": 5427,
+          "name": "wireplumber",
+          "cpu_percent_one_core": 0.0,
+          "rss_kib": 31920
+        },
+        {
+          "pid": 5428,
+          "name": "pipewire-pulse",
+          "cpu_percent_one_core": 28.67,
+          "rss_kib": 321300
+        }
+      ],
+      "limits": "short snapshot; player ticks include threads; shared audio services may include other clients; no underrun or sustained-growth acceptance"
+    },
+    "paused-after-playback.json": {
+      "state": "paused baseline after playback, three panels visible",
+      "seconds": 3.0,
+      "processes": [
+        {
+          "pid": 22850,
+          "name": "player",
+          "cpu_percent_one_core": 0.0,
+          "rss_kib": 45872
+        },
+        {
+          "pid": 5425,
+          "name": "pipewire",
+          "cpu_percent_one_core": 7.33,
+          "rss_kib": 24060
+        },
+        {
+          "pid": 5427,
+          "name": "wireplumber",
+          "cpu_percent_one_core": 0.0,
+          "rss_kib": 31920
+        },
+        {
+          "pid": 5428,
+          "name": "pipewire-pulse",
+          "cpu_percent_one_core": 30.67,
+          "rss_kib": 321988
+        }
+      ],
+      "limits": "short snapshot; player ticks include threads; shared audio services may include other clients; no underrun or sustained-growth acceptance"
+    }
+  },
+  "sample_build": "087c62bd; final f55 adds X11 movement event handler",
+  "limits": [
+    "3-second snapshots, not sustained performance acceptance",
+    "existing EFL diagnostics remain a release follow-up",
+    "X11-specific grouped movement; other display backends unvalidated",
+    "keyboard/focus and full playlist persistence still pending"
+  ],
+  "rollback": "build/out/prototype/v2-backup",
+  "runtime_left": "final rack open, stopped, EQ flat"
+}

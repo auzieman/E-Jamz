@@ -25,3 +25,7 @@ The first original raster/Edje resource snapshot is in assets/skins/blue-steel. 
 An E-Jamz UI adapter sets the label and maps activation to a transport request; the media core determines playback and reports current state back. An icon does not claim playback is working. No timers or periodic animation are used in this control. The EDC entrypoint is control.edc; compile with `edje_cc -id assets control.edc -o blue-steel.edj` through the approved remote toolchain.
 
 This is a self-contained versioned resource export with origin revision and file hashes, not a runtime dependency on the desktop theme or theme-kit checkout. It is not yet compiled, rendered or wired into a player host. The high-resolution button texture must be checked for small-control readability and decoded-memory cost on target before it becomes a default.
+
+## Host target clarification — 2026-10-11
+
+User identifies the 12 GiB i3 laptop as the performance target; lab compute is for builds. Rich skins must remain static/event-driven and ordinary listening must stay inexpensive. Three-second paused v2 sample: 0.0% CPU of one core, RSS 61,172 KiB; application threads only, excludes PipeWire and does not prove playback or sustained stability. Data in build/out/prototype/paused-resource-sample.json. Continue visible/playing, rack-open and minimized measurements before establishing release budgets.

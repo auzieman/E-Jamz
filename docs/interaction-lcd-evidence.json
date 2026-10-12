@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-11",
+  "build_run": "d658c626-5aed-4689-8c35-b3c6f86416a7",
+  "build_status": "complete",
+  "font": {
+    "family": "Doto",
+    "wght": 800,
+    "ROND": 0,
+    "license": "SIL OFL 1.1",
+    "embedded": true
+  },
+  "artifacts": {
+    "ejamz": "705ea4f7dc3f065d2218a64a84a16cd418c46e2df1ca26393daef27fbec50854",
+    "player.edj": "eac19da5cf7cf6a7dfed5dc69e8fd1a1f91c39de0cf9e0842630de255fcfb3bf",
+    "EJamzLCD.ttf": "723ac93f16b6951f89b7d925b2cf5b2b6ed9c4b6a01f957f873e6b77a9f2ccd1",
+    "Doto-OFL.txt": "26a7b58bdba6cda8a78ca6e8b3791d8013b8abc6d5e6519f84193893aee02020"
+  },
+  "checks": {
+    "mixed_format_playback": "6 files: S3M, MP3, MOD, XM, MED, M4A; Playing, pause/resume/stop, EQ continuity, Flat passed",
+    "uri_drop": "Real Xdnd transaction completes and imports 15 TRON M4A files",
+    "folder_button": "Native chooser button imports the same 15 tracks; cancel closes without destruction diagnostics in the bounded check",
+    "wheel": "Actual XTest wheel changed page 1 to page 2",
+    "filter": "Actual typing derezzed returns 2 of 16 tracks; Z typing did not trigger playback",
+    "tracker_progress": "Measured duration advances disabled seek/progress control; native elapsed clock advances",
+    "duration_process": "Ecore owns FFprobe child; latest mixed-format/native logs show no GLib reaper warning",
+    "lcd": "Actual native uppercase title and clock use embedded dot matrix at 400px"
+  },
+  "images": [
+    "images/ejamz-dot-lcd-preview.png",
+    "images/ejamz-dot-lcd-native.png",
+    "images/ej009-final-filter.png",
+    "images/ej009-wheel-page.png",
+    "images/ej009-folder-import.png"
+  ],
+  "limits": [
+    "Tracker seeking remains disabled",
+    "Filter searches filenames/folder paths; artist/album tag facets need metadata index",
+    "Prototype X11 drop route; Wayland unverified",
+    "No sustained performance, full accessibility or release acceptance",
+    "Playlist persistence and transient playback/import status remain follow-ups"
+  ]
+}

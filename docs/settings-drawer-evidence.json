@@ -1,0 +1,68 @@
+{
+  "objective": "EJ-013 attached sliding settings drawer, completing EJ-012 skins/preferences",
+  "date": "2026-10-12",
+  "build": {
+    "run": "808d6c41-3abd-4d46-be0d-8501f3cdedd5",
+    "status": "complete",
+    "source_archive": {
+      "baseline": "63c043a",
+      "sha256": "34a9fd41331f0893e5bc7ba40a3f632cd569b69092863e7dbc8b01ad28400287",
+      "remote_bundle": "/var/lib/bkc/e-native-inputs/34a9fd41331f0893e5bc7ba40a3f632cd569b69092863e7dbc8b01ad28400287.tgz",
+      "project": "E-Jamz",
+      "scope": "EJ-013 attached animated settings drawer"
+    },
+    "artifacts": {
+      "ejamz": "f55324d3623b40a6e6155f269c7ebcd0c5f588ae466a7d4d96b5a9af6e06a698",
+      "player.edj": "a517f2348ab46ef7c9d17a62d597dd0fed0246027145b3dc6ffa809e671fa026",
+      "EJamzLCD.ttf": "e0d66f83d109daae88abc36b042cd97c8e0f09f2ac7098e437b267d0ac905d83"
+    },
+    "source": {
+      "src/ui/prototype.c": "8e94acbdf1abdfcaee4a75774d4426a297aae477c71a84be92993e2859267363",
+      "src/ui/player.edc": "af6bf91d8be41f4d7d5da0f72845b68e17391565a0e3eef64036f0668c686608",
+      "src/ui/theme-palette.h": "caa051db26a8ff13c560dfb841525ca98db0d6cacb5cc7e650c307d9d9208527",
+      "tools/generate-player-edc.py": "2a78d1fbceaaa7570adca98fd92c45e2104ef895fa928e30db314048acbaec02"
+    }
+  },
+  "native_checks": [
+    "Drawer opens to 680px and closes to 400px; player stays 400px wide",
+    "180ms timeline animation stops when settled",
+    "Native skin change and panel toggles with one continuously selected MP3 output",
+    "Full rack and fixed-height drawer header/control layout rendered at 680x719",
+    "Save & Close and drawer header X retract; settings file mode 0600",
+    "Theme/panels/volume restored from isolated settings file; EQ/bypass restoration established in EJ-012",
+    "Three palettes preserve engine identity, queue and DSP in integrated verification"
+  ],
+  "playback": {
+    "log": "build/out/prototype/ej013-playback.log",
+    "formats": [
+      "MP3",
+      "MOD",
+      "S3M",
+      "XM",
+      "MED"
+    ],
+    "checks": [
+      "actual position advance",
+      "pause/resume/stop",
+      "EQ continuity",
+      "preset curves/faders",
+      "bypass/restore",
+      "Flat reset"
+    ],
+    "binary_identical_to_playback_verified_build": true
+  },
+  "screenshots": [
+    "docs/images/ej013-drawer-expanded.png",
+    "docs/images/ej013-drawer-collapsed.png",
+    "docs/images/ej013-header-close.png",
+    "docs/images/ej013-restored-rack.png"
+  ],
+  "limits": [
+    "No channels playback/provider integration yet",
+    "No queue/session restore or imported XMMS skin layouts",
+    "No sustained resource/underrun acceptance for this drawer slice",
+    "Seagate fixtures currently unavailable; prior six-format EJ-012 pass includes M4A",
+    "Earlier EJ-012 import recheck timed out during host interruption; current slice does not modify importer"
+  ],
+  "preferences": "XDG config by default; isolated GUI checks use EJAMZ_CONFIG_FILE under workspace"
+}

@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-11",
+  "owner": "media-player",
+  "build_run": "0e17ff8f-ff39-4227-a2f3-925965e86785",
+  "status": "complete",
+  "artifacts": {
+    "ejamz": "457eca2a017ab913df5473fb2382087102be446abb6ad8f8224f0d167a38c0c5",
+    "player.edj": "1e02ba14344e4d645c0fb8bd3b2dd5bfad2db4af3c8e781a4e0ebf721d12a454"
+  },
+  "implemented": [
+    "Add Music / Playlist / Equalizer labels and separate panel visibility lamps",
+    "Flat / Bass Focus / Vocal / Bright / Warm original cut-only EQ presets, Reset, Custom and EQ On/Off",
+    "Save List / Save Matches snapshot to new local M3U8",
+    "Load List appends ordered local M3U/M3U8 references, resolves relative paths/file URIs, reports skips",
+    "Native Save/Load filename dialogs with Enter/Cancel and transport key grabs released during editing",
+    "Scrollable compact search, app-scoped synchronous software rendering, screen/shelf clearance on expansion"
+  ],
+  "validation": {
+    "core": "all preset gains/faders, bypass/restore, filtered export and existing-file preservation passed",
+    "playlist_fixture": "BOM/CRLF, relative reference, escaped file URI, missing/remote skips and order passed",
+    "playback": "six-format transport/EQ regression passed; final GUI loaded a saved result and played the expected M4A",
+    "native_roundtrip": "filter derezzed -> two saved tracks -> load appends two -> four matches among 17; 400px width retained",
+    "bounds": "expanded 400x719 window at y149 on 900px display, leaving 32px clearance",
+    "runtime_log": "final isolated GUI check retained without fileselector or async-render diagnostics",
+    "resources": "3-second snapshot: loaded M4A 22% one-core CPU, 76708 KiB RSS; paused 0%, 76676 KiB. Shared audio services active while paused; no sustained/underrun acceptance"
+  },
+  "images": [
+    "images/ej011-live-controls.png",
+    "images/ej011-preset-menu.png",
+    "images/ej011-gui-roundtrip.png",
+    "images/ej011-loaded-track-paused.png",
+    "images/ej011-final-rack.png"
+  ],
+  "limits": [
+    "Save/Load are filename dialogs; full browser repair remains for legacy Add Music",
+    "Existing playlist files are preserved; choose a fresh Save As name",
+    "Artist/album tag facets, saved custom EQ presets and automatic session persistence remain future work",
+    "Channels documented as next streaming slice; no provider/channel playback implemented",
+    "No release, full accessibility or sustained performance acceptance"
+  ]
+}

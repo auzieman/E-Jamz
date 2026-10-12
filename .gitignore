@@ -2,3 +2,4 @@ build/out/
 outputs/
 __pycache__/
 *.pyc
+build/prototype/font-preview.conf

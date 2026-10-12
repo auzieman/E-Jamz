@@ -1,0 +1,29 @@
+{
+  "family": "Doto",
+  "author": "\u00d3liver Lalan",
+  "license": "SIL Open Font License 1.1",
+  "instance": {
+    "wght": 800,
+    "ROND": 0
+  },
+  "files": [
+    {
+      "file": "Doto-variable.ttf",
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/doto/Doto%5BROND%2Cwght%5D.ttf",
+      "git_blob": "ed8f0db9fb890c570b558941201d1504483f5ebc",
+      "sha256": "6f4fe7d37853b91df3698daa84cde2dbe1c9695d88c986e6510134910337d426"
+    },
+    {
+      "file": "METADATA.pb",
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/doto/METADATA.pb",
+      "git_blob": "a19b340bf8059ca0ef1cca5a3ec2c6fc4bdc4feb",
+      "sha256": "b9a130386405d295bde49a6ddde5d919060ea41cdb063e7e1d235967a195d946"
+    },
+    {
+      "file": "OFL.txt",
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/doto/OFL.txt",
+      "git_blob": "e0b8ec15325ee3a8500cf29df4c19e36372f180b",
+      "sha256": "26a7b58bdba6cda8a78ca6e8b3791d8013b8abc6d5e6519f84193893aee02020"
+    }
+  ]
+}

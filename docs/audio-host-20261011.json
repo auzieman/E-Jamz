@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-11",
+  "kind": "read-only capability discovery; no audible playback acceptance",
+  "gstreamer": {
+    "returncode": 0,
+    "output": "gst-inspect-1.0 version 1.28.3\nGStreamer 1.28.3\nhttps://alpinelinux.org"
+  },
+  "ffmpeg": {
+    "returncode": 0,
+    "output": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with gcc 15.2.0 (Alpine 15.2.0)\nconfiguration: --prefix=/usr --disable-librtmp --disable-lzma --disable-static --disable-stripping --enable-avfilter --enable-gpl --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libdav1d --enable-libdrm --enable-libdvdnav --enable-libdvdread --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopenmpt --enable-libopus --enable-libplacebo --enable-libpulse --enable-librav1e --enable-librist --enable-libshaderc --enable-libsoxr --enable-libsrt --enable-libssh --enable-libtheora --enable-libv4l2 --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxcb --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-lto=auto --enable-lv2 --enable-openssl --enable-pic --enable-pthreads --enable-shared --enable-vaapi --enable-vdpau --enable-version3 --enable-vulkan --optflags=-O3 --enable-libsvtav1 --enable-libvpl\nlibavutil      60. 26.102 / 60. 26.102\nlibavcodec     62. 28.102 / 62. 28.102\nlibavformat    62. 12.102 / 62. 12.102\nlibavdevice    62.  3.102 / 62.  3.102\nlibavfilter    11. 14.102 / 11. 14.102\nlibswscale      9.  5.102 /  9.  5.102\nlibswresample   6.  3.102 /  6.  3.102\n\nExiting with exit code 0"
+  },
+  "audio_server": {
+    "returncode": 0,
+    "output": "Server String: /run/user/1000/pulse/native\nLibrary Protocol Version: 35\nServer Protocol Version: 35\nIs Local: yes\nClient Index: 2159\nTile Size: 65472\nServer Name: PulseAudio (on PipeWire 1.6.8)\nServer Version: 15.0.0\nDefault Sample Specification: float32le 2ch 48000Hz\nDefault Channel Map: front-left,front-right\nDefault Sink: alsa_output.pci-0000_00_1f.3.analog-stereo\nDefault Source: alsa_input.usb-Samson_Technologies_Samson_Meteorite_Mic-00.analog-stereo"
+  },
+  "elements": {
+    "playbin3": {
+      "available": true
+    },
+    "pulsesink": {
+      "available": true
+    },
+    "pipewiresink": {
+      "available": true
+    },
+    "alsasink": {
+      "available": true
+    },
+    "jackaudiosink": {
+      "available": true
+    },
+    "equalizer-10bands": {
+      "available": true
+    },
+    "audiopanorama": {
+      "available": true
+    },
+    "openmptdec": {
+      "available": false
+    },
+    "avdec_mp3": {
+      "available": true
+    }
+  }
+}
