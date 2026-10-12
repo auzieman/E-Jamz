@@ -327,3 +327,11 @@ main and peeled tag exactly match accepted local refs. User-supplied desktop
 shot added to README without edits; original file/hash retained in provenance.
 Release download archives contain selected licenses/notices and tagged source
 URL. Full Sci-Fi donor EDJ remains outside public binary assets.
+
+## 2026-10-12 — Native APK publication
+
+User authorized APK packaging, repository updates and articles. Build ejamz and blackknight-wallpapers from the accepted immutable v0.1.0 source commits using pinned Alpine 3.24.2 and matching signed EFL dependencies. Keep original licenses and font notices; exclude full donor theme binary. Use BKC staged build/publication and retain logs, package/signature/integration proof. Existing signing-host availability is under investigation; use a separately signed companion feed if its key cannot be recovered without touching existing feed trust. Rollback retains the preceding feed snapshot and backed-up article/page bodies. No host installation or image rebuild is implied.
+
+Publication result: signed ejamz 0.1.0-r0 and blackknight-wallpapers 0.1.0-r0 are published at https://auzix.auzietek.com/alpine/repo/apps/v3.24/. BKC validation run 490909fd-80e2-4c31-aa0a-c38dfbdac8b8 and publication run cc54ba45-4cdb-4c97-9c05-4400a4e34984 completed. Native APK signatures, a clean-root installation, installed launcher/skin/wallpaper checks, musl ELF linkage, HTTPS byte hashes and fresh-client signed-index/package resolution passed. Both wallpaper EDJs match the accepted release bytes. The additional public key and fingerprint are documented in AlpinEifyd/docs/companion-apks.md; the private signer is retained on edge outside Git and public directories. Existing base-feed trust remains unchanged.
+
+The native companion apps article and two related discussion articles are published; both AUZiX/AlpinE homepages include installation links. No runtime restart, laptop installation or new boot-image acceptance is claimed.

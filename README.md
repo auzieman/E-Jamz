@@ -43,3 +43,9 @@ See [licensing scope and exceptions](LICENSING.md).
 - [AlpinE’ifyd walkthrough](https://youtu.be/JF7gO9Wty5I): discussion and desktop tour.
 - [AUZiX / AlpinE public home](https://auzix.auzietek.com/alpine/): release status and signed packages.
 - [BlackKnight E Theme](https://github.com/auzieman/BlackKnight-E-Theme): companion project.
+
+## AlpinE APK installation
+
+Native packages are available through the signed AlpinE companion feed.
+See [installation and public-key verification](https://github.com/auzieman/AlpinEifyd/blob/main/docs/companion-apks.md)
+for AlpinE 3.24 x86_64. Packages preserve user settings and desktop selections.
