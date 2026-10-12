@@ -2,7 +2,8 @@
 
 Current objective: publish the user-accepted native E-Jamz slice through GitHub,
 with source/build evidence, notices and reproducible runtime packages.
-Repository destination and licensing remain pending; no public tag exists.
+Public repository selected: auzieman/E-Jamz. Original software GPLv3; original
+artwork CC BY-SA 4.0. Final publication verification follows below.
 
 ## Alignment preparation history
 Date: 2026-10-10
@@ -309,3 +310,12 @@ source checks pass; E-Jamz dialog/plugin positive and negative schema checks
 pass in a workspace-only jsonschema environment. GitHub SSH authenticates as
 auzieman. Remotes/publication/tags wait for destination and license selection.
 The connected GitHub tools do not provide new-repository creation.
+
+Publication authorization — 2026-10-12: user explicitly selected public
+auzieman/E-Jamz and auzieman/BlackKnight-E-Theme repositories, GPLv3 original
+code and CC BY-SA 4.0 original artwork. License texts and contribution boundaries
+added; Doto OFL retained and Sci-Fi donor portions not relicensed. Browser
+authenticated as auzieman provides the new-repository creation route; GitHub
+connector metadata and Git SSH refs verify the result. Publish accepted main
+and development, with annotated v0.1.0 tags identifying retained native proof.
+Runtime archives include licenses/notices and the corresponding source URL.

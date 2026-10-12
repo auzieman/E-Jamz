@@ -1,0 +1,2 @@
+# Keep the upstream license HTML verbatim, including its original spacing.
+LICENSES/CC-BY-SA-4.0.html whitespace=-blank-at-eol

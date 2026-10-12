@@ -29,3 +29,6 @@ Preparation references: [visual/performance acceptance](docs/visual-performance.
 [Channels planning](docs/channels.md) covers the next streaming/service slice.
 
 Source and bundled-font notices: [NOTICE.md](NOTICE.md).
+
+Original code: **GPLv3**. Original artwork: **CC BY-SA 4.0**.
+See [licensing scope and exceptions](LICENSING.md).

@@ -1,9 +1,8 @@
 # Source and asset notices
 
 Original E-Jamz C/Python/Edje work and original blue-steel raster artwork are
-recorded in this repository. A project-wide license has not yet been selected;
-release publication must record the selected terms without replacing the
-notices below.
+recorded in this repository. Original software is GPL-3.0-only; original artwork is CC-BY-SA-4.0.
+See LICENSE, LICENSING.md and LICENSES/. The exceptions below remain intact.
 
 Doto is Copyright 2024 The Doto Project Authors. The original font and derived
 EJamzLCD font use the SIL Open Font License 1.1. See assets/fonts/OFL.txt,

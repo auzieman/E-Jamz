@@ -1,8 +1,9 @@
 # E-Jamz v0.1.0 release preparation
 
 2026-10-12. The user accepted the current native application for release.
-Publication destination and original-source/artwork license are being selected;
-no GitHub release or tag has been published by this preparation record.
+Release target: https://github.com/auzieman/E-Jamz. The user selected public
+publication, GPLv3 original software and CC BY-SA 4.0 original artwork.
+Doto remains OFL-1.1. This is the first user-accepted native release.
 
 ## Included behavior
 
