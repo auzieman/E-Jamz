@@ -36,3 +36,10 @@ Source and bundled-font notices: [NOTICE.md](NOTICE.md).
 
 Original code: **GPLv3**. Original artwork: **CC BY-SA 4.0**.
 See [licensing scope and exceptions](LICENSING.md).
+
+## AlpinE desktop and companion projects
+
+- [AlpinEifyd](https://github.com/auzieman/AlpinEifyd): Alpine-native Enlightenment workstation and installer sources.
+- [AlpinE’ifyd walkthrough](https://youtu.be/JF7gO9Wty5I): discussion and desktop tour.
+- [AUZiX / AlpinE public home](https://auzix.auzietek.com/alpine/): release status and signed packages.
+- [BlackKnight E Theme](https://github.com/auzieman/BlackKnight-E-Theme): companion project.
