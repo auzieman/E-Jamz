@@ -40,11 +40,13 @@ typedef struct {
     double tracker_duration;
 } App;
 static App app;
+static Elm_Theme *controls_theme;
 static int skin;
+static char *playlist_directory;
 static Eina_Bool remember_audio=EINA_TRUE,closing;
 #define DRAWER_WIDTH 280
 static Evas_Object *settings_popup,*drawer_face,*drawer_clip,*drawer_slot;
-static Evas_Object *settings_checks[3],*settings_radio;
+static Evas_Object *settings_checks[3],*settings_radio,*settings_radios[3],*rack_seams[2];
 static Ecore_Animator *drawer_anim;
 static int drawer_width,drawer_target,drawer_from,window_height=PLAYER_HEIGHT;
 static void drawer_position(void) {
@@ -83,12 +85,14 @@ static void settings_load(void) {
             if(g_key_file_has_key(config,"audio","bypass",NULL))app.bypass=g_key_file_get_boolean(config,"audio","bypass",NULL);
         }
     }
+    playlist_directory=g_key_file_get_string(config,"library","playlist_directory",NULL);
     g_key_file_unref(config);g_free(path);
 }
 static Eina_Bool settings_save(void) {
     if(getenv("EJAMZ_VERIFY")||getenv("EJAMZ_VERIFY_DROP"))return EINA_TRUE;
     GKeyFile *config=g_key_file_new();
     g_key_file_set_integer(config,"view","theme",skin);
+    if(playlist_directory)g_key_file_set_string(config,"library","playlist_directory",playlist_directory);
     g_key_file_set_boolean(config,"view","playlist",app.queue_open);
     g_key_file_set_boolean(config,"view","equalizer",app.rack_open);
     g_key_file_set_boolean(config,"audio","remember",remember_audio);
@@ -121,6 +125,20 @@ static void theme_apply(void) {
             }
             edje_object_color_class_set(faces[j],palette[i].name,r,g,b,a,255,255,255,255,255,255,255,255);
         }
+    /* Native check/radio labels are TEXT parts, not markup-capable labels. */
+    const char *states[]={"normal","pressed","disabled"};
+    int ink[3]={skin==1?19:skin==2?66:23,skin==1?49:skin==2?43:60,skin==1?43:skin==2?17:82};
+    for(int i=0;i<3;i++)for(int j=0;j<3;j++) {
+        char name[80];snprintf(name,sizeof(name),"/fg/%s/radio/text",states[j]);
+        if(settings_radios[i])edje_object_color_class_set(elm_layout_edje_get(settings_radios[i]),name,ink[0],ink[1],ink[2],j==2?140:255,0,0,0,0,0,0,0,0);
+        snprintf(name,sizeof(name),"/fg/%s/check/text",states[j]);
+        if(settings_checks[i])edje_object_color_class_set(elm_layout_edje_get(settings_checks[i]),name,ink[0],ink[1],ink[2],j==2?140:255,0,0,0,0,0,0,0,0);
+    }
+    if(app.face) {
+        int r,g,b,a;
+        if(edje_object_color_class_get(app.face,"ejamz.16_39_59_245",&r,&g,&b,&a,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL))
+            for(int i=0;i<2;i++)if(rack_seams[i])evas_object_color_set(rack_seams[i],r*a/255,g*a/255,b*a/255,a);
+    }
     /* The editable filter sits on the LCD and follows its dark ink color. */
     if(app.filter_entry) {
         elm_entry_text_style_user_pop(app.filter_entry);
@@ -656,11 +674,33 @@ static void save_window_deleted(void *data,Evas *canvas,Evas_Object *obj,void *e
     transport_grabs(!(app.filter_entry&&elm_object_focus_get(app.filter_entry)));
     g_free(save->contents);g_free(save);
 }
+static void remember_playlist_directory(const char *path) {
+    g_free(playlist_directory);playlist_directory=g_path_get_dirname(path);
+    settings_save();
+}
+static Eina_Bool playlist_browser_filter(const char *path,Eina_Bool directory,void *data) {
+    (void)data;return directory||playlist_path(path);
+}
+static void playlist_browser_done(void *data,Evas_Object *obj,void *event) {
+    (void)obj;PlaylistSave *save=data;const char *path=event;
+    if(!path){ecore_job_add(delete_later,save->win);return;}
+    if(!playlist_path(path)||!g_file_test(path,G_FILE_TEST_IS_REGULAR)) {
+        status("Choose an existing M3U / M3U8 playlist");return;
+    }
+    import_path(path);remember_playlist_directory(path);ecore_job_add(delete_later,save->win);
+}
+static char *playlist_start_directory(void) {
+    if(playlist_directory&&g_file_test(playlist_directory,G_FILE_TEST_IS_DIR))return g_strdup(playlist_directory);
+    char *documents=g_build_filename(g_get_home_dir(),"Documents",NULL);
+    if(g_file_test(documents,G_FILE_TEST_IS_DIR))return documents;
+    g_free(documents);return g_strdup(g_get_home_dir());
+}
 static void save_done(void *data,Evas_Object *obj,void *event) {
     (void)obj;PlaylistSave *save=data;
     if(!event){ecore_job_add(delete_later,save->win);return;}
     const char *chosen=event;char *path=playlist_path(chosen)?g_strdup(chosen):g_strconcat(chosen,".m3u8",NULL);
     if(write_playlist(path,save->contents)) {
+        remember_playlist_directory(path);
         char message[80];snprintf(message,sizeof(message),"Saved %u tracks to playlist",save->count);status(message);
         ecore_job_add(delete_later,save->win);
     }
@@ -693,6 +733,17 @@ static void playlist_dialog(Eina_Bool load) {
     save->win=elm_popup_add(app.win);
     elm_object_part_text_set(save->win,"title,text",load?"Load Playlist":"Save Playlist");
     evas_object_event_callback_add(save->win,EVAS_CALLBACK_DEL,save_window_deleted,save);
+    if(load) {
+        Evas_Object *files=elm_fileselector_add(save->win);
+        elm_fileselector_expandable_set(files,EINA_FALSE);
+        elm_fileselector_is_save_set(files,EINA_FALSE);
+        elm_fileselector_custom_filter_append(files,playlist_browser_filter,NULL,"Playlists (*.m3u, *.m3u8)");
+        char *directory=playlist_start_directory();elm_fileselector_path_set(files,directory);g_free(directory);
+        evas_object_size_hint_min_set(files,500,330);
+        evas_object_smart_callback_add(files,"done",playlist_browser_done,save);
+        elm_object_content_set(save->win,files);evas_object_show(files);evas_object_show(save->win);
+        transport_grabs(EINA_FALSE);return;
+    }
     Evas_Object *box=elm_box_add(save->win),*label=elm_label_add(box);
     char message[120];
     if(load)snprintf(message,sizeof(message),"M3U / M3U8 file — append its tracks");
@@ -703,7 +754,11 @@ static void playlist_dialog(Eina_Bool load) {
     evas_object_smart_callback_add(save->entry,"unfocused",text_unfocused,NULL);
     elm_entry_single_line_set(save->entry,EINA_TRUE);elm_entry_scrollable_set(save->entry,EINA_TRUE);
     elm_object_part_text_set(save->entry,"guide","Filename or full path");
-    if(!load)elm_entry_entry_set(save->entry,"~/Documents/playlist.m3u8");
+    if(!load) {
+        char *directory=playlist_start_directory(),*path=g_build_filename(directory,"playlist.m3u8",NULL);
+        char *markup=elm_entry_utf8_to_markup(path);elm_entry_entry_set(save->entry,markup);
+        free(markup);g_free(path);g_free(directory);
+    }
     evas_object_size_hint_min_set(save->entry,330,30);
     evas_object_size_hint_weight_set(save->entry,EVAS_HINT_EXPAND,0);evas_object_size_hint_align_set(save->entry,EVAS_HINT_FILL,EVAS_HINT_FILL);
     elm_box_pack_end(box,save->entry);evas_object_show(save->entry);
@@ -789,6 +844,30 @@ static void pack(Evas_Object *box_obj, Evas_Object *obj) {
     evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, 0);
     evas_object_size_hint_align_set(obj, EVAS_HINT_FILL, EVAS_HINT_FILL);
     elm_box_pack_end(box_obj, obj); evas_object_show(obj);
+}
+/* A stereo rack has contiguous sections. Do not distribute spare window
+   height between children (for example while the settings drawer is open). */
+static void rack_layout(Evas_Object *box_obj,Evas_Object_Box_Data *priv,void *data) {
+    (void)priv;(void)data;
+    int x,y,total=0,seam=0;evas_object_geometry_get(box_obj,&x,&y,NULL,NULL);
+    for(int i=0;i<2;i++)if(rack_seams[i])evas_object_hide(rack_seams[i]);
+    Eina_List *children=evas_object_box_children_get(box_obj),*node;
+    Evas_Object *child;
+    EINA_LIST_FOREACH(children,node,child) {
+        int h;evas_object_size_hint_min_get(child,NULL,&h);
+        int nominal=child==app.main_layout?PLAYER_HEIGHT:child==app.rack?RACK_HEIGHT:QUEUE_HEIGHT;
+        h=MAX(h,nominal);
+        /* Bridge the skin texture's transparent top/bottom inset only at
+           interior joins, keeping the outer corners and unused canvas clear. */
+        if(total&&seam<2&&rack_seams[seam]) {
+            evas_object_move(rack_seams[seam],x,y+total-2);
+            evas_object_resize(rack_seams[seam],UI_WIDTH,4);
+            evas_object_show(rack_seams[seam++]);
+        }
+        evas_object_move(child,x,y+total);evas_object_resize(child,UI_WIDTH,h);total+=h;
+    }
+    eina_list_free(children);
+    evas_object_size_hint_min_set(box_obj,UI_WIDTH,total);
 }
 typedef struct { const char *name; double bands[10]; } EqPreset;
 /* Relative tonal emphasis using cuts, matched to our GStreamer bands. */
@@ -905,7 +984,7 @@ static void settings_open(void *data,Evas_Object *obj,const char *emission,const
         evas_object_size_hint_weight_set(box,EVAS_HINT_EXPAND,0);
         evas_object_size_hint_align_set(box,EVAS_HINT_FILL,0);
         for(int i=0;i<3;i++) {
-            Evas_Object *radio=elm_radio_add(box);elm_object_text_set(radio,skin_names[i]);elm_radio_state_value_set(radio,i);
+            Evas_Object *radio=elm_radio_add(box);settings_radios[i]=radio;elm_object_text_set(radio,skin_names[i]);elm_radio_state_value_set(radio,i);
             if(group)elm_radio_group_add(radio,group);else group=radio;
             elm_box_pack_end(box,radio);evas_object_show(radio);
             evas_object_smart_callback_add(radio,"changed",settings_theme,NULL);
@@ -959,6 +1038,36 @@ static void grabbed_key(void *data,Evas *canvas,Evas_Object *obj,void *event) {
     keyboard(NULL,app.win,obj,EVAS_CALLBACK_KEY_DOWN,event);
 }
 static int verification_failed;
+static Eina_Bool verify_rack_layout(void *data) {
+    (void)data;
+    static int phase;
+    if(phase%2==0) {
+        int mask=phase/2;
+        if(mask==0)settings_open(NULL,NULL,NULL,NULL);
+        if(mask==8) {
+            printf("VERIFY RACK: eight panel/drawer combinations; contiguous geometry PASS\n");
+            fflush(stdout);elm_exit();return ECORE_CALLBACK_CANCEL;
+        }
+        app.rack_open=!!(mask&1);app.queue_open=!!(mask&2);
+        drawer_set(!!(mask&4));arrange_panels();
+        /* Spare height must remain below the rack, never between sections. */
+        evas_object_resize(app.win,UI_WIDTH+drawer_width,window_height+60);
+    } else {
+        evas_smart_objects_calculate(evas_object_evas_get(app.win));
+        Evas_Object *panels[]={app.main_layout,app.rack,app.queue_win};
+        Eina_Bool shown[]={EINA_TRUE,app.rack_open,app.queue_open};
+        int bottom=-1;
+        for(int i=0;i<3;i++)if(shown[i]) {
+            int x,y,w,h;evas_object_geometry_get(panels[i],&x,&y,&w,&h);
+            if(x!=0||w!=UI_WIDTH||(bottom>=0&&y!=bottom)) {
+                fprintf(stderr,"VERIFY RACK FAIL: panel %d at %d,%d %dx%d; expected y %d\n",i,x,y,w,h,bottom);
+                verification_failed=1;elm_exit();return ECORE_CALLBACK_CANCEL;
+            }
+            bottom=y+h;
+        }
+    }
+    phase++;return ECORE_CALLBACK_RENEW;
+}
 static Eina_Bool verify_controls(void) {
     double saved[10];memcpy(saved,app.bands,sizeof(saved));
     for(unsigned preset=0;preset<sizeof(presets)/sizeof(presets[0]);preset++) {
@@ -1049,15 +1158,24 @@ EAPI_MAIN int elm_main(int argc, char **argv) {
     if(verify)app.bands[0]=-3.0;
     if(!create_player(NULL))return 1;
     app.win = elm_win_add(NULL,"ejamz",ELM_WIN_BASIC);
+    /* Our rack owns its skin. Keep native controls on a private stock theme
+       so desktop theme changes cannot replace their surfaces or geometry. */
+    controls_theme=elm_theme_new();elm_theme_set(controls_theme,"default");
+    elm_object_theme_set(app.win,controls_theme);
     elm_win_title_set(app.win,getenv("EJAMZ_TITLE")?getenv("EJAMZ_TITLE"):(verify?"E-Jamz — verification":"E-Jamz — prototype"));
     elm_win_autodel_set(app.win, EINA_TRUE);
     evas_object_event_callback_add(app.win,EVAS_CALLBACK_DEL,window_deleted,NULL);
     evas_object_event_callback_add(app.win,EVAS_CALLBACK_RESIZE,fit_window,NULL);
     evas_object_smart_callback_add(app.win, "delete,request", quit_app, NULL);
     elm_policy_set(ELM_POLICY_QUIT, ELM_POLICY_QUIT_LAST_WINDOW_CLOSED);
+    for(int i=0;i<2;i++) {
+        rack_seams[i]=evas_object_rectangle_add(evas_object_evas_get(app.win));
+        evas_object_pass_events_set(rack_seams[i],EINA_TRUE);
+    }
     Evas_Object *shell=box(app.win);elm_box_horizontal_set(shell,EINA_TRUE);elm_box_padding_set(shell,0,0);
     Evas_Object *outer=elm_box_add(shell),*layout=elm_layout_add(app.win);
     elm_box_align_set(outer,0,0);elm_box_padding_set(outer,0,0);
+    elm_box_layout_set(outer,rack_layout,NULL,NULL);
     evas_object_size_hint_weight_set(outer,0,EVAS_HINT_EXPAND);
     evas_object_size_hint_align_set(outer,0,0);
     evas_object_size_hint_max_set(outer,UI_WIDTH,-1);
@@ -1076,9 +1194,11 @@ EAPI_MAIN int elm_main(int argc, char **argv) {
     evas_object_size_hint_min_set(layout, UI_WIDTH, PLAYER_HEIGHT);
     evas_object_size_hint_max_set(layout,-1,PLAYER_HEIGHT);
     app.seek = elm_slider_add(layout); elm_slider_min_max_set(app.seek, 0, 1);
+    elm_object_scale_set(app.seek,0.65);
     elm_object_part_content_set(layout, "swallow.seek", app.seek);
     evas_object_smart_callback_add(app.seek, "slider,drag,stop", seek_changed, NULL);
     app.volume = elm_slider_add(layout); elm_slider_min_max_set(app.volume, 0, 1);
+    elm_object_scale_set(app.volume,0.65);
     elm_slider_value_set(app.volume, app.volume_level);
     elm_object_part_content_set(layout, "swallow.volume", app.volume);
     evas_object_smart_callback_add(app.volume, "changed", volume_changed, NULL);
@@ -1092,7 +1212,7 @@ EAPI_MAIN int elm_main(int argc, char **argv) {
     app.queue_win=panel_layout("ejamz/queue",QUEUE_HEIGHT);
     app.queue_face=elm_layout_edje_get(app.queue_win);
     app.filter_entry=elm_entry_add(app.queue_win);
-    elm_entry_single_line_set(app.filter_entry,EINA_TRUE);elm_entry_scrollable_set(app.filter_entry,EINA_TRUE);
+    elm_entry_single_line_set(app.filter_entry,EINA_TRUE);elm_entry_scrollable_set(app.filter_entry,EINA_FALSE);
     elm_object_scale_set(app.filter_entry,0.85);
     elm_entry_text_style_user_push(app.filter_entry,"DEFAULT='font=DejaVu Sans font_size=12 color=#173c52'");
     elm_entry_editable_set(app.filter_entry,EINA_TRUE);elm_object_focus_allow_set(app.filter_entry,EINA_TRUE);
@@ -1136,7 +1256,10 @@ EAPI_MAIN int elm_main(int argc, char **argv) {
     }
     if(verify&&!verify_controls()){fprintf(stderr,"VERIFY CONTROLS FAIL\n");return 1;}
     Ecore_Timer *timer = ecore_timer_add(0.25, tick, NULL);
-    if(verify)ecore_timer_add(.1,verify_playback,NULL);
+    if(getenv("EJAMZ_VERIFY_LAYOUT"))ecore_timer_add(.5,verify_rack_layout,NULL);
+    else if(verify)ecore_timer_add(.1,verify_playback,NULL);
+    if(getenv("EJAMZ_PREVIEW_SETTINGS"))settings_open(NULL,NULL,NULL,NULL);
+    if(getenv("EJAMZ_PREVIEW_PLAYLISTS"))playlist_dialog(EINA_TRUE);
     if(getenv("EJAMZ_CHOOSER_PATH"))open_audio(NULL,NULL,NULL,NULL);
     const char *drop_test=getenv("EJAMZ_VERIFY_DROP");
     if(drop_test) {
@@ -1159,6 +1282,7 @@ EAPI_MAIN int elm_main(int argc, char **argv) {
     char *path; EINA_LIST_FREE(app.paths, path) free(path);
     if(app.visible)g_array_unref(app.visible);
     g_free(app.filter);
+    elm_theme_free(controls_theme);g_free(playlist_directory);
     return verification_failed?1:0;
 }
 ELM_MAIN()

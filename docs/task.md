@@ -1,3 +1,32 @@
+# Follow-up — contiguous rack and desktop-theme isolation
+
+2026-10-13: user confirms all sections change with desktop theme and gaps remain.
+Replace spare-height distribution with a contiguous native rack layout; give
+controls a private stock Elementary theme while retaining the three Edje skins.
+Verify actual section geometry with drawer open/closed and visibility toggles,
+plus native alpha/preset checks. Retain alpha-coupled artifacts for rollback.
+No desktop configuration or media changes.
+User also requested a remembered, playlist-filtered file browser. Load now
+browses M3U/M3U8 files and directories; successful save/load retains the folder
+in settings. Save defaults to that folder too; absent folders fall back to
+Documents/home. Original no-overwrite playlist save semantics remain intact.
+
+Result: BKC c107a48e-1080-46f2-9461-b9216cfa6981 completed. Native preset,
+three-palette alpha/DSP preservation and eight rack/drawer geometry checks pass.
+Checks used isolated config files and Ice/Dark environment theme selections,
+without changing the desktop itself. Private stock controls retain compact
+sliders; playlist filter has a skin-owned LCD backdrop. Native check/radio TEXT
+colour classes replace the mistaken literal colour markup found during preview.
+Four-pixel skin-coloured backing at interior joins covers transparent texture
+insets; outer corners and unused canvas retain transparency. Final 680x685 rack
+and settings screenshot: docs/images/ej015-joined-rack.png. Playlist browser
+screenshot: docs/images/ej015-playlist-browser.png; fixture contains lowercase
+and uppercase playlists, a directory, MP3 and text files. Only playlists and the
+directory appear, starting in the persisted folder. No new audio acceptance is
+claimed. EFL image-type diagnostics remain observable on startup; the native
+file browser also emitted a stock-theme progressbar diagnostic. These are not
+a clean-runtime pass. Earlier artifacts remain available for rollback.
+
 # Active task — shared skin transparency
 
 User reports transparency mismatch between player modules on October 12, 2026.

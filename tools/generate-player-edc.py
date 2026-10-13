@@ -57,6 +57,7 @@ for group,title,group_height in [('queue','E-JAMZ  /  PLAYLIST',344),('rack','E-
  if group=='queue':
   box('summary.lcd',18,40,444,27,'189 214 228 255')
   label('summary',28,41,158,25,'QUEUE EMPTY',11,'23 60 82 255')
+  box('filter.lcd',190,40,272,27,'189 214 228 255')
   box('swallow.filter',190,40,272,27,'0 0 0 0','SWALLOW')
   for i in range(8):
    yy=74+i*28

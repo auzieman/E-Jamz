@@ -6,7 +6,7 @@ Native EFL audio player and companion EQ rack. [v0.1.0 Working beta](https://git
 
 E-Jamz in Amber Steel with ten-band EQ, filtered playlist and settings drawer on the BlackKnight desktop.
 
-See the [prototype and current limits](docs/prototype.md), including native folder/drops, wheel paging, filename/folder filtering, M3U8 save/load, EQ presets, the embedded dot-LCD display, an attached settings drawer and three live skins.
+See the [prototype and current limits](docs/prototype.md), including native folder/drops, wheel paging, filename/folder filtering, M3U8 save/load, EQ presets, the embedded dot-LCD display, an attached settings drawer and three live skins. Playlist loading uses a file browser filtered to M3U/M3U8; save and load remember their last folder across launches.
 
 See the [feature list](docs/feature-map.md), [product design](docs/product-design.md),
 [library relocation plan](docs/library-relocation.md) and [host audio/fixtures](docs/audio-and-fixtures.md).
