@@ -1,7 +1,7 @@
 from pathlib import Path
 r=Path(__file__).resolve().parents[1]
 height=258
-p=['fonts { font: "EJamzLCD.ttf" "EJamzLCD"; } images { image: "button.png" COMP; } collections { group { name: "ejamz/player"; min: 480 258; parts {']
+p=['fonts { font: "EJamzLCD.ttf" "EJamzLCD"; } images { image: "button.png" COMP; } collections { group { name: "ejamz/player"; min: 480 258; data { item: "window.alpha" "1"; } parts {']
 def box(name,x,y,w,h,color,kind='RECT',more=''):
  p.append(f'part {{ name: "{name}"; type: {kind}; mouse_events: 0; description {{ state: "default" 0.0; rel1 {{ relative: {x/480} {y/height}; }} rel2 {{ relative: {(x+w)/480} {(y+h)/height}; }} color: {color}; {more} }} }}')
 def label(name,x,y,w,h,value,size,color='200 222 236 255'):
@@ -89,7 +89,8 @@ for group,title,group_height in [('queue','E-JAMZ  /  PLAYLIST',344),('rack','E-
 height=504
 p.append('group { name: "ejamz/settings"; min: 480 504; parts {')
 box('body',0,0,480,height,'255 255 255 255','IMAGE','image { normal: "button.png"; border: 160 160 160 160; border_scale: 1; border_scale_by: 0.08; }')
-box('inner',12,32,456,height-44,'16 39 59 245')
+# Native settings text uses dark ink on this theme-owned LCD surface.
+box('inner',12,32,456,height-44,'189 214 228 255')
 box('header',2,2,476,29,'255 255 255 255','IMAGE','image { normal: "button.png"; border: 160 160 160 160; border_scale: 1; border_scale_by: 0.035; }')
 label('brand',18,4,370,25,'E-JAMZ / SETTINGS',13)
 event('drag',8,3,410,27)

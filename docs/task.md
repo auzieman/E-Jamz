@@ -1,4 +1,27 @@
-# Active task — initial release publication
+# Active task — shared skin transparency
+
+User reports transparency mismatch between player modules on October 12, 2026.
+Inspect the current shared-window/palette implementation and native backdrop.
+Keep skin-owned alpha consistent across player, playlist, EQ and settings;
+preserve playback/queue/DSP and existing settings. Build natively through BKC,
+then verify module visibility and alpha behavior in each palette. Retain the
+previous binary/EDJ for rollback; do not relocate music or change desktop theme.
+Implemented: basic shared ARGB window with Edje-declared window.alpha;
+removed inherited standard-window backdrop, explicitly set rack/shell padding,
+and gave settings controls a palette-matched opaque LCD surface. All realized
+sections receive the same palette/alpha values. Desktop theme and user audio
+settings are unchanged; the original live player was not interrupted.
+Final BKC native build c6346d09-45b9-45dc-b764-0d5b8360f119 completed.
+Native preset/theme checks passed across three palettes, preserving engine,
+queue and DSP. Rendered pixel checks verified unused canvas alpha 0 and LCD/
+settings alpha 255. Playlist/EQ/settings and Midnight/Amber rendering were
+inspected; final Amber screenshot is docs/images/ej014-shared-alpha-amber.png.
+Checks used an isolated settings file and no media tracks; no new sustained
+playback/performance acceptance is claimed. Previous release artifacts remain
+intact. Local ~/.local/bin/ejamz and desktop launcher use the updated build;
+restart the existing player when convenient to use it.
+
+# Previous task — initial release publication
 
 Current objective: publish the user-accepted native E-Jamz slice through GitHub,
 with source/build evidence, notices and reproducible runtime packages.

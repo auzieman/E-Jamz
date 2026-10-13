@@ -105,6 +105,9 @@ static Eina_Bool settings_save(void) {
     g_clear_error(&error);g_free(contents);g_free(path);g_free(dir);g_key_file_unref(config);return okay;
 }
 static void theme_apply(void) {
+    /* All panels share one ARGB surface; the skin, not Elementary's
+       unrelated standard-window background, owns transparent regions. */
+    if(app.win&&app.face){const char *alpha=edje_object_data_get(app.face,"window.alpha");elm_win_alpha_set(app.win,alpha&&!strcmp(alpha,"1"));}
     Evas_Object *faces[]={app.face,app.queue_face,app.rack_face,drawer_face};
     for(unsigned j=0;j<sizeof(faces)/sizeof(faces[0]);j++)if(faces[j])
         for(unsigned i=0;i<sizeof(palette)/sizeof(palette[0]);i++) {
@@ -978,10 +981,16 @@ static Eina_Bool verify_controls(void) {
     GstElement *owner=app.player;Eina_List *paths=app.paths;
     for(int t=0;t<3;t++) {
         skin=t;theme_apply();
+        if(!elm_win_alpha_get(app.win))return EINA_FALSE;
+        Evas_Object *faces[]={app.face,app.queue_face,app.rack_face,drawer_face};
+        for(unsigned j=0;j<sizeof(faces)/sizeof(faces[0]);j++)if(faces[j])
+            for(unsigned k=0;k<sizeof(palette)/sizeof(palette[0]);k++){
+                int r,g,b,a;if(!edje_object_color_class_get(faces[j],palette[k].name,&r,&g,&b,&a,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)||a!=palette[k].a)return EINA_FALSE;
+            }
         if(app.player!=owner||app.paths!=paths||memcmp(app.bands,saved,sizeof(saved)))return EINA_FALSE;
         for(int i=0;i<10;i++){char property[16];double gain;snprintf(property,sizeof(property),"band%d",i);g_object_get(app.eq,property,&gain,NULL);if(gain!=saved[i])return EINA_FALSE;}
     }
-    skin=0;theme_apply();printf("VERIFY THEMES: three palettes; engine, queue and DSP preserved PASS\n");fflush(stdout);
+    skin=0;theme_apply();printf("VERIFY THEMES: three palettes; shared window/panel alpha, engine, queue and DSP preserved PASS\n");fflush(stdout);
     const char *output=getenv("EJAMZ_VERIFY_IO");
     if(output) {
         app.filter=g_strdup("centerfield");refresh_queue();unsigned count;char *contents=filtered_playlist(&count);
@@ -1039,15 +1048,16 @@ EAPI_MAIN int elm_main(int argc, char **argv) {
     settings_load();
     if(verify)app.bands[0]=-3.0;
     if(!create_player(NULL))return 1;
-    app.win = elm_win_util_standard_add("ejamz", getenv("EJAMZ_TITLE")?getenv("EJAMZ_TITLE"):(verify?"E-Jamz — verification":"E-Jamz — prototype"));
+    app.win = elm_win_add(NULL,"ejamz",ELM_WIN_BASIC);
+    elm_win_title_set(app.win,getenv("EJAMZ_TITLE")?getenv("EJAMZ_TITLE"):(verify?"E-Jamz — verification":"E-Jamz — prototype"));
     elm_win_autodel_set(app.win, EINA_TRUE);
     evas_object_event_callback_add(app.win,EVAS_CALLBACK_DEL,window_deleted,NULL);
     evas_object_event_callback_add(app.win,EVAS_CALLBACK_RESIZE,fit_window,NULL);
     evas_object_smart_callback_add(app.win, "delete,request", quit_app, NULL);
     elm_policy_set(ELM_POLICY_QUIT, ELM_POLICY_QUIT_LAST_WINDOW_CLOSED);
-    Evas_Object *shell=box(app.win);elm_box_horizontal_set(shell,EINA_TRUE);
+    Evas_Object *shell=box(app.win);elm_box_horizontal_set(shell,EINA_TRUE);elm_box_padding_set(shell,0,0);
     Evas_Object *outer=elm_box_add(shell),*layout=elm_layout_add(app.win);
-    elm_box_align_set(outer,0,0);
+    elm_box_align_set(outer,0,0);elm_box_padding_set(outer,0,0);
     evas_object_size_hint_weight_set(outer,0,EVAS_HINT_EXPAND);
     evas_object_size_hint_align_set(outer,0,0);
     evas_object_size_hint_max_set(outer,UI_WIDTH,-1);

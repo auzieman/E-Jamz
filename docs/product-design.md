@@ -53,3 +53,14 @@ Streaming providers, visualizers, eplet and actual multi-source mixing stay late
 The user-selected compact default is 400 px wide: player 215 px, rack 183 px and
 queue 287 px nominal heights, with text kept at least 10 px. Actual window sizing
 includes Elementary layout spacing. Silver-blue faders retain high contrast.
+
+## Shared surface and transparency
+
+Player, playlist, EQ and settings share one native window and palette owner.
+The main Edje group declares `window.alpha` (1 enables the ARGB surface); the
+skin's part/image/color-class alpha determines coverage. The host uses a basic
+window without an unrelated Elementary standard background underneath it.
+Palette changes preserve per-part alpha and update every realized section.
+Transparent corners and unused drawer space remain transparent; LCD ink and
+readable surfaces retain their authored opacity. External skins should declare
+their window-alpha contract explicitly. No global desktop theme is modified.
